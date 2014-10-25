@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-    "os"
-)
+import ( "fmt" ; "os" )
 
 func validate(input string) bool {
     commands := map[string]bool {
@@ -19,12 +16,18 @@ func validate(input string) bool {
 }
 
 func throwMsg(msg int) {
-    messages := [...]string{
-        "[Robin] Welcome Batman!\n\n version: v0.1.0\n author: Raphael Amorim\n ",
-        "[Robin] Hey Batman, I've founded a error!\n\n Error: Invalid command\n Suggestion: use `robin help` to see all commands\n",
-        "[Robin] Hey Batman, please sent a parameter!" }
+    /* Availables Messages:
+        0 - Default Msg
+        1 - Invalid Command Error
+        2 - Missing Parameter
+    */
 
-    fmt.Println(messages[msg])
+    messages := [...]string{
+        "Welcome Batman!\n\n version: v0.1.0\n author: Raphael Amorim\n ",
+        "Hey Batman, I've founded a error!\n\n Error: Invalid command\n Suggestion: use `robin help` to see all commands\n",
+        "Hey Batman, please sent a parameter!" }
+
+    fmt.Println("[Robin]", messages[msg])
 }
 
 func execute(task string, params string) {
@@ -33,15 +36,16 @@ func execute(task string, params string) {
 
 func main() {
     args := os.Args
-    argsLen := len(args)
 
-    if argsLen > 1 {
+    if len(args) > 1 {
         if validate(args[1]) {
-            if argsLen > 2 {
+
+            if len(args) > 2 {
                 execute(args[1], args[2])
             } else {
                 throwMsg(2)
             }
+
         } else {
             throwMsg(1)
         }
