@@ -1,30 +1,52 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
     "os"
-    "io/ioutil"
 )
 
-type Page struct {
-    Header string
-    Body string
-    Footer string
+func validate(input string) bool {
+    commands := map[string]bool {
+        "domain"  : true,
+        "caniuse" : true,
+    }
+
+    if commands[input] {
+        return true
+    }
+
+    return false
+}
+
+func throwMsg(msg int) {
+    messages := [...]string{
+        "[Robin] Welcome Batman!\n\n version: v0.1.0\n author: Raphael Amorim\n ",
+        "[Robin] Hey Batman, I've founded a error!\n\n Error: Invalid command\n Suggestion: use `robin help` to see all commands\n",
+        "[Robin] Hey Batman, please sent a parameter!" }
+
+    fmt.Println(messages[msg])
+}
+
+func execute(task string, params string) {
+    fmt.Printf(" Executing...\n\n Task: %s\n Params: %s\n\n ", task, params)
 }
 
 func main() {
-    fmt.Println("[Robin] Running... \n")
+    args := os.Args
+    argsLen := len(args)
 
-    if len(os.Args) > 1 {
-        file, e := ioutil.ReadFile(os.Args[1])
-        if e != nil {
-            fmt.Printf("File error: %v\n", e)
-            os.Exit(1)
+    if argsLen > 1 {
+        if validate(args[1]) {
+            if argsLen > 2 {
+                execute(args[1], args[2])
+            } else {
+                throwMsg(2)
+            }
+        } else {
+            throwMsg(1)
         }
-        fmt.Printf("%s\n", string(file))
-
     } else {
-        fmt.Printf("[Robin] Please use a valid path\n")
-        os.Exit(1)
+        throwMsg(0)
     }
 }
+
