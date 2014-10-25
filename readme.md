@@ -1,7 +1,5 @@
 # Robin
-> Static site generator using modular concepts
-
-Convert Markdown in HTML and define templates to apply this. Static sites come out ready for deployment using modular concepts.
+> The developer best friend
 
 ## Guide
 
