@@ -1,9 +1,10 @@
 package main
 
-import ( "fmt" ; "os" )
+import ( "os" ; "./libs" ; "./utils" ; "reflect" )
 
-func validate(input string) bool {
+func Validate(input string) bool {
     commands := map[string]bool {
+        "help"    : true,
         "domain"  : true,
         "caniuse" : true,
     }
@@ -15,42 +16,46 @@ func validate(input string) bool {
     return false
 }
 
-func throwMsg(msg int) {
-    /* Availables Messages:
-        0 - Default Msg
-        1 - Invalid Command Error
-        2 - Missing Parameter
-    */
-
-    messages := [...]string{
-        "Welcome Batman!\n\n version: v0.1.0\n author: Raphael Amorim\n ",
-        "Hey Batman, I've founded a error!\n\n Error: Invalid command\n Suggestion: use `robin help` to see all commands\n",
-        "Hey Batman, please sent a parameter!" }
-
-    fmt.Println("[Robin]", messages[msg])
+func Run(m map[string]interface{}, name string, params ... interface{}) (result []reflect.Value, err error) {
+    f := reflect.ValueOf(m[name])
+    if len(params) != f.Type().NumIn() {
+        utils.ThrowMsg(2)
+        return
+    }
+    in := make([]reflect.Value, len(params))
+    for k, param := range params {
+        in[k] = reflect.ValueOf(param)
+    }
+    result = f.Call(in)
+    return
 }
 
-func execute(task string, params string) {
-    fmt.Printf(" Executing...\n\n Task: %s\n Params: %s\n\n ", task, params)
+func Execute(task string, params string) {
+    funcs := map[string]interface{} {
+        "help"    : libs.Help,
+        "domain"  : libs.Domain,
+        "caniuse" : libs.Caniuse,
+    }
+
+    Run(funcs, task)
 }
 
 func main() {
     args := os.Args
 
     if len(args) > 1 {
-        if validate(args[1]) {
-
+        if Validate(args[1]) {
             if len(args) > 2 {
-                execute(args[1], args[2])
-            } else {
-                throwMsg(2)
-            }
+                Execute(args[1], args[2])
 
+            } else {
+                utils.ThrowMsg(2)
+            }
         } else {
-            throwMsg(1)
+            utils.ThrowMsg(1)
         }
     } else {
-        throwMsg(0)
+        utils.ThrowMsg(0)
     }
 }
 
