@@ -1,6 +1,8 @@
 package libs
 
-import ( . "fmt" )
+import (
+	. "fmt"
+)
 
 func Help() {
 	Println("Help!!")
@@ -13,8 +15,3 @@ func Domain() {
 func Caniuse() {
 	Println("Caniuse!!")
 }
-
-
-
-
-
