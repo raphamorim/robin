@@ -54,7 +54,7 @@ func main() {
 				Execute(args[1], args[2])
 
 			} else {
-				utils.ThrowMsg(2)
+				Execute(args[1], "")
 			}
 		} else {
 			utils.ThrowMsg(1)
