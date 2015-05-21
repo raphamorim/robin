@@ -18,3 +18,9 @@ func ThrowMsg(msg int) {
 
 	Println("[Robin]", messages[msg])
 }
+
+func Perror(err error) {
+    if err != nil {
+        panic(err)
+    }
+}

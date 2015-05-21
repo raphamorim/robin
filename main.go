@@ -10,7 +10,7 @@ import (
 func Validate(input string) bool {
 	commands := map[string]bool{
 		"help":    true,
-		"domain":  true,
+		"domainr":  true,
 		"caniuse": true,
 	}
 
@@ -38,11 +38,11 @@ func Run(m map[string]interface{}, name string, params ...interface{}) (result [
 func Execute(task string, params string) {
 	funcs := map[string]interface{}{
 		"help":    libs.Help,
-		"domain":  libs.Domain,
+		"domainr":  libs.Domain,
 		"caniuse": libs.Caniuse,
 	}
 
-	Run(funcs, task)
+	Run(funcs, task, params)
 }
 
 func main() {

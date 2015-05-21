@@ -3,7 +3,20 @@
 
 ## Guide
 
-Not available yet, much is being developed.
+Robin is a spotlight for command line
+
+### Domainr
+
+Search in the worldwide domain search using by Domainr:
+
+`$ go run main.go caniuse <search-option>`
+
+### Caniuse
+
+Search in the caniuse data to check browsers compatibilities:
+
+`$ go run main.go caniuse <search-option>`
+
 
 ## About
 
