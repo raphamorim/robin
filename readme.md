@@ -9,7 +9,7 @@ Robin is a spotlight for command line
 
 Search in the worldwide domain search using by Domainr:
 
-`$ go run main.go caniuse <search-option>`
+`$ go run main.go domainr <search-option>`
 
 ### Caniuse
 
