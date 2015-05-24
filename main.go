@@ -12,6 +12,7 @@ func Validate(input string) bool {
 		"help":    true,
 		"domainr":  true,
 		"caniuse": true,
+		"isitup": true,
 	}
 
 	if commands[input] {
@@ -40,6 +41,7 @@ func Execute(task string, params string) {
 		"help":    libs.Help,
 		"domainr":  libs.Domain,
 		"caniuse": libs.Caniuse,
+		"isitup": libs.Isitup,
 	}
 
 	Run(funcs, task, params)

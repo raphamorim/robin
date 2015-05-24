@@ -17,6 +17,11 @@ Search in the caniuse data to check browsers compatibilities:
 
 `$ go run main.go caniuse <search-option>`
 
+### Isitup
+
+Check whether a website is up or down
+
+`$ go run main.go isitup <website-url>`
 
 ## About
 
