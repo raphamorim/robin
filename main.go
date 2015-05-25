@@ -10,9 +10,9 @@ import (
 func Validate(input string) bool {
 	commands := map[string]bool{
 		"help":    true,
-		"domainr":  true,
+		"domainr": true,
 		"caniuse": true,
-		"isitup": true,
+		"isitup":  true,
 	}
 
 	if commands[input] {
@@ -39,9 +39,9 @@ func Run(m map[string]interface{}, name string, params ...interface{}) (result [
 func Execute(task string, params string) {
 	funcs := map[string]interface{}{
 		"help":    libs.Help,
-		"domainr":  libs.Domain,
+		"domainr": libs.Domain,
 		"caniuse": libs.Caniuse,
-		"isitup": libs.Isitup,
+		"isitup":  libs.Isitup,
 	}
 
 	Run(funcs, task, params)
@@ -54,7 +54,6 @@ func main() {
 		if Validate(args[1]) {
 			if len(args) > 2 {
 				Execute(args[1], args[2])
-
 			} else {
 				Execute(args[1], "")
 			}
