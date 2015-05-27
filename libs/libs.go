@@ -19,7 +19,7 @@ func Help() {
 		" $ robin version           	[output version number]",
 		" $ robin domainr <search>   	[output domainr search]",
 		" $ robin caniuse <search>   	[output caniuse search]",
-		" $ robin is-up <url>   [Check whether a website is up or down]",}
+		" $ robin isitup <url>   [Check whether a website is up or down]",}
 
 	Println()
 
@@ -31,13 +31,6 @@ func Help() {
 	Println()
 }
 
-type Posts struct {
-    UserId int
-    Id  int
-    Title  string
-    Body  string
-}
-
 type IsitupStruct struct {
     Domain  string
     Port  int
@@ -47,8 +40,15 @@ type IsitupStruct struct {
     Response_Time float64
 }
 
-func requestJson(url string ) {
-	
+func StaticServer(port string) {
+	if (port == "") {
+		port = "8000"
+	}
+
+	mux := http.NewServeMux()
+	// mux.HandleFunc("/devs", Desenvolvedores)
+
+	http.ListenAndServe(":" + port, mux)
 }
 
 func Isitup(url string) {
@@ -80,16 +80,7 @@ func Isitup(url string) {
 }
 
 func Domain(search string) {
-	res, err := http.Get("http://jsonplaceholder.typicode.com/posts")
-	utils.Perror(err)
-
-	jsonDataFromHttp, err := ioutil.ReadAll(res.Body)
-    utils.Perror(err)
-
-    // Println(reflect.TypeOf([]byte(jsonDataFromHttp))
-    var domainrStruct []Posts
-    err = json.Unmarshal([]byte(jsonDataFromHttp), &domainrStruct)
-    utils.Perror(err)
+	Println("Searching for " + search)
 }
 
 func Caniuse(search string) {
